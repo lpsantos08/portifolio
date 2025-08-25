@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+ 
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8"> <!-- codificação de caracteres como UTF-8, permitindo o uso correto de acentos (á, é, õ) e caracteres especiais (ç). -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- define como a página deve ser exibida em dispositivos móveis. Ajusta a largura para corresponder à tela do dispositivo. Mantém o zoom padrão (1:1), evitando que a página apareça ampliada ou reduzida.-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- força o Internet Explorer a usar a versão mais recente do seu motor de renderização, em vez de modos de compatibilidade mais antigos. -->
+        <title>Portifólio Larissa Pereira</title>
+ 
+        <!-- swiper css  -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+ 
+        <!-- linkando box icons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ 
+        <!-- linkando css -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+ 
+    <body>
+        <!-- cabeçalho design -->
+        <header class="header">
+            <a href="#" class="logo">Larissa <span> Pereira.</span></a>  <!-- inserção do logo  -->
+            <nav class="navbar"> <!-- inserção lista de navegação -->
+                <a href="#home" class="active">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contato">Contato</a>  
+            </nav>
+            <!-- criando id icon na div -->
+            <div class="bx bx-moon" id="darkmode-icon"></div>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </header>
+ 
+        <!-- home section design -->
+        <section class="home" id="home">
+            <!-- conteudo home-->
+            <div class="home-content">  
+                <h3>Olá, eu sou</h3>
+                <h1>Larissa Pereira</h1>
+                <p>
+                   Transformo HTML5, CSS3, JavaScript e Bootstrap em experiências digitais modernas e eficientes.
+                   Atuo com compromisso, atenção aos detalhes e foco nas boas práticas do front-end.
+                </p>
+                <!-- div redes sociais dentro da div de conteudo -->
+                <div class="social-media">
+                     <a href="https://www.linkedin.com/in/larissa-pereira-02b329144/" target="_blank"><i class='bx bxl-linkedin' ></i></a>  <!-- inserção de icones do boxicon -->
+                     <a href="https://github.com/lpsantos08" target="_blank"><i class='bx bxl-github' ></i></a>
+                </div>
+                <!-- inserção de botão home -->
+                <a href="https://drive.google.com/uc?export=download&id=1LIeLFxC6UJOfQLaAazc0fjwNUNZ-Uz7c" class="btn" target="_blank">Download CV</a>
+            </div>
+ 
+            <!-- estrutura das divs da profissão, circulo e overlay -->
+            <div class="profession-container">
+                <div class="profession-box">
+                    <div class="profession" style="--i:0;">
+                        <i class='bx bxl-html5 icon'></i>
+                        <h3>HTML5</h3>
+                    </div>
+                    <div class="profession" style="--i:1;">
+                        <i class='bx bxl-css3 icon'></i>
+                        <h3>CSS3</h3>
+                    </div>
+                    <div class="profession" style="--i:2;">
+                        <i class='bx bxl-javascript icon'></i>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="profession" style="--i:3;">
+                        <i class='bx bxl-bootstrap icon' ></i>
+                        <h3>Bootstrap</h3>
+                    </div>
+ 
+                    <!-- estrutura efeito circulo  -->
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <!-- estrutura do overlay baixo da img -->
+            <div class="overlay"></div>
+ 
+            <!-- definindo imagem home -->
+            <div class="home-img">
+                <img src="images/home2.png" alt="">
+            </div>
+        </section>
+ 
+        <!-- sobre section design -->
+        <section class="about" id="sobre">
+            <!-- definindo imagem sobre -->
+            <div class="about-img">
+                <img src="images/sobre.png" alt="">
+            </div>
+ 
+            <!-- conteudo sobre-->
+            <div class="about-content">
+                <h2 class="heading">Sobre <span> Mim </span></h2>   <!-- span para destacar a palavra -->
+                <h3>Formada em Análise e Desenvolvimento de Sistemas pela FATEC </h3>
+                <p>Sou desenvolvedora web com 3 anos de experiência na criação de sites, atuando no setor de Site Pronto da Claro Empresas. Nesse período, desenvolvi interfaces modernas, responsivas e funcionais, sempre alinhadas às necessidades de negócio e à experiência do usuário.
+                    <br> <br> Tenho domínio em HTML5, CSS3, JavaScript e Bootstrap, utilizando essas tecnologias para desenvolver soluções práticas, acessíveis e bem estruturadas.
+                    <br> <br> Carrego como objetivo agregar valor a equipes que buscam qualidade, organização e resultado no desenvolvimento web.
+                </p>
+                 <!-- <a href="#" class="btn">Ler Mais</a> -->
+                 <!-- CRIAR UMA PÁGINA SORBE MIM LINKADO AO LER MAIS FUTURAMENTE COM CERTIFICADOS -->
+            </div>
+        </section>
+ 
+        <!-- serviços section design -->
+        <section class="services" id="servicos">
+            <h2 class="heading">Do Desenvolvimento<span> aos Ajustes Finais</span></h2>
+ 
+            <div class="services-container">
+                <div class="services-box">
+                    <i class='bx bx-code-alt'></i><br><br>
+                    <h3>Desenvolvimento de Interfaces</h3>
+                    <p>
+                         Com foco em acessibilidade, usabilidade e performance.
+                         Estruturo seções, menus, formulários e elementos interativos com código limpo, organizado e reutilizável, utilizando HTML5, CSS3, JavaScript e Bootstrap.
+                    </p>
+                    <!-- <a href="#" class="btn">Ler Mais</a> -->
+                </div>
+                <div class="services-box">
+                    <i class='bx bxs-user-voice'></i><br><br>
+                    <h3>Integração Equipes e Sistemas</h3>
+                    <p>
+                        Capacidade de atuar em conjunto com times de design e back-end,
+                        interpretando layouts e transformando ideias em código funcional.
+                    </p>
+                        <!-- <a href="#" class="btn">Ler Mais</a> -->
+                </div>
+                <div class="services-box">
+                    <i class='bx bx-globe'></i><br><br>
+                    <h3>Testes e Ajustes </h3>
+                    <p>Garantia de funcionamento adequado em diferentes navegadores e dispositivos, com atenção aos detalhes visuais e técnicos.</p>
+                        <!-- <a href="#" class="btn">Ler Mais</a> -->
+                </div>
+            </div>  
+        </section>
+           
+        <!-- portfolio section design -->
+        <section class="portfolio" id="portfolio">
+            <h2 class="heading">Projeto <span>Mais Recente</span></h2>
+ 
+            <div class="portfolio-container">
+                <div class="portfolio-box">
+                    <img src="images/rock802.jpg" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Festival Rock 80</h4>
+                        <p>Site com visual retrô, informações sobre atrações e ingressos, desenvolvido com construtor visual e ajustes em código.</p>
+                        <a href="https://wfsites.websitecreatorprotool.com/9281yj6hgh.com/Admin/index.html/sk_snapshot_preview"  target="_blank"><i class='bx bx-link-external'></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="images/clara.png" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Cartão de Crédito Empresarial</h4>
+                        <p>Site institucional com visual moderno e foco em serviços, desenvolvido com construtor visual e código.</p>
+                        <a href="https://wfsites.websitecreatorprotool.com/y1pgqrq69w.com/Admin/index.html/sk_snapshot_preview" target="_blank"><i class='bx bx-link-external'></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="images/padlock.jpg" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Padlock</h4>
+                        <p>Projeto web moderno com foco em automação, segurança e conectividade, feito com construtor visual e código.</p>
+                        <a href="https://wfsites.websitecreatorprotool.com/6e44nstrol.com/Admin/index.html/sk_snapshot_preview" target="_blank"><i class='bx bx-link-external'></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="images/construction.png" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Estamos construindo algo incrível por aqui.</h4>
+                         <p>Enquanto isso, coloca o capacete e segura a ansiedade! Em breve a novidade chega!</p>
+                        <!-- <a href="" target="_blank"><i class='bx bx-link-external'></i></a> -->
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="images/construction.png" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Estamos construindo algo incrível por aqui.</h4>
+                         <p>Enquanto isso, coloca o capacete e segura a ansiedade! Em breve a novidade chega!</p>
+                        <!-- <a href="" target="_blank"><i class='bx bx-link-external'></i></a> -->
+                    </div>
+                </div>
+                <div class="portfolio-box">
+                    <img src="images/construction.png" alt="">
+                    <div class="portfolio-layer">
+                        <h4>Estamos construindo algo incrível por aqui. </h4>
+                         <p>Enquanto isso, coloca o capacete e segura a ansiedade! Em breve a novidade chega!</p>
+                        <!-- <a href="" target="_blank"><i class='bx bx-link-external'></i></a> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- depoimentos section design -->
+        <div class="testimonial-container">
+            <h2 class="heading">Depoimento <span> Valioso</span></h2>
+            <!-- Wrapper (envoltório) usado para agrupar o box principal do carrossel de depoimentos -->
+            <div class="testimonial-wrapper">
+                <!-- Box principal que recebe a classe "mySwiper" para ativar o Swiper.js -->
+                <div class="testimonial-box mySwiper">
+                    <!-- Container que agrupa todos os slides (depoimentos individuais) -->
+                    <div class="testimonial-content swiper-wrapper">
+                        <!-- Slide individual do carrossel com imagem, depoimento e identificação do cliente -->
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="images/perfil1.jpg" alt="">
+                            <h3>"Acabei de ver o resultado e estou encantado! Ficou acima do que eu esperava. Parabéns pelo ótimo trabalho!"</h3>
+                            <p> — Cliente, Proprietário de Pequena Empresa</p>
+                        </div>
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="images/perfil1.jpg" alt="">
+                            <h3>"Ficou simplesmente incrível! Você conseguiu captar exatamente o que eu queria. Muito obrigada!"</h3>
+                            <p> — Empreendedora, Cliente de Site Institucional</p>
+                        </div>
+                        <div class="testimonial-slide swiper-slide">
+                            <img src="images/perfil1.jpg" alt="">
+                            <h3>"Que capricho! Ficou melhor do que eu imaginava. Obrigado pelo empenho e dedicação!"</h3>
+                            <p> — Cliente, Proprietário de Pequena Empresa</p>
+                        </div>
+                    </div>
+ 
+                    <div class="swiper-button-next"></div>  <!-- Botão para navegar para o próximo slide -->
+                    <div class="swiper-button-prev"></div>  <!-- Botão para voltar ao slide anterior -->
+                    <div class="swiper-pagination"></div>  <!-- Indicadores de página (bolinhas de navegação) do carrossel -->
+                </div>
+            </div>
+        </div>
+ 
+        <!-- contato section design -->
+        <section class="contact" id="contato">
+            <h2 class="heading">Me <span>Contate!</span></h2>
+            <!-- Início do formulário, com ID usado para acessar via JavaScript (EmailJS) -->
+            <form id="formContato">  
+                <!-- Grupo de dois inputs na mesma linha -->
+                <div class="input-box">
+                    <input type="text"  name="nome" placeholder="Nome Completo" required>
+                    <input type="email"  name="email" placeholder="Endereço de Email" required>   <!-- placeholder: Exibe um texto de sugestão dentro do campo. -->
+                </div>
+                <div class="input-box">
+                    <input type="number"  name="telefone"  placeholder="Número Celular" required>
+                    <input type="text"  name="assunto" placeholder="Assunto Email" required>
+                </div>
+                <!-- <textarea> cria um campo maior para que o usuário digite sua mensagem. -->
+                <textarea name="mensagem" cols="30" rows="10" placeholder="Digite sua mensagem" required></textarea> <!-- cols="30" rows="10" → Define largura e altura (mas o CSS pode sobrescrever isso). -->
+                 <!-- Botão que envia o formulário -->
+                <input type="submit" value="Enviar Mensagem" class="btn">
+            </form>
+        </section>
+ 
+        <!-- criando mensagem de feedback do form -->
+        <div id="mensagemFeedback" class="mensagem-feedback escondido"></div>
+ 
+        <!-- footer design -->
+        <footer class="footer">
+            <div class="footer-text">
+                <p>Designed & developed by Larissa Pereira &copy; 2025</p>
+            </div>
+            <!-- inserindo icone (link para home) -->
+            <div class="footer-iconTop">
+                <a href="#home"><i class='bx bx-chevrons-up'></i></a>
+            </div>
+        </footer>
+ 
+        <!-- scroll revelação -->
+        <script src="https://unpkg.com/scrollreveal"></script>
+ 
+        <!-- swiper js -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ 
+        <!-- EmailJS SDK (biblioteca que faz o envio funcionar) -->
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+ 
+        <!-- linkando js -->
+        <script src="js/script.js"></script>
+    </body>
+</html>

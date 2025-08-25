@@ -1,0 +1,976 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* aplica os estilos a todos os elementos HTML da página. */
+*{
+    margin: 0; /* Remove a margem padrão de todos os elementos */
+    padding: 0; /* Remove o preenchimento interno padrão */
+    box-sizing: border-box; /* garante que a altura e largura incluam padding e borda, evitando que o tamanho total do elemento seja alterado  */
+    text-decoration: none; /* Remove sublinhados de links (<a>) por padrão */
+    border: none;  /* remove bordas padrão de elementos como botões e inputs. */
+    outline: none; /* remove contornos de foco (exemplo: o contorno azul ao selecionar um campo de formulário). */
+    scroll-behavior: smooth; /* habilita rolagem suave ao clicar em âncoras */
+    font-family: 'Inter', sans-serif;  /* Define a fonte padrão para todos os elementos  caso ela não esteja disponível, usa uma fonte sans-serif genérica */
+}
+
+/* definindo variáveis CSS globais dentro do seletor :root */
+:root{ /* seletor especial no CSS que representa o elemento html. */
+    --bg-color:#eaf2fd; /* cor de fundo */
+    --text-color:#333; /* cor do texto  */
+    --main-color:#395375; /* cor principal */
+    --white-color: #fdfdfd;
+    --placeholder: #afaeae;
+    --portfolio:black;
+    --allwhite: white;
+    --shadow-color:rgba(0, 0, 0, 0.399); /* sombra (preta com 20% de opacidade) */
+}
+
+/* variáveis p/ substituirem as versões claras declaradas em :root */
+.dark-mode{
+    --bg-color:#0a101a; /* cor de fundo */
+    --text-color:#fdfdfd; /* cor do texto  */
+    --main-color:#416799; /* cor principal */
+    --white-color: #0a101a;
+    --placeholder: #979797;
+    --portfolio: white;
+    --shadow-color:rgba(255, 255, 255, 0.2);/* sombra (preta com 20% de opacidade) */
+}
+
+/* estilizando html */
+html{
+  overflow-x: hidden; /* impede que a página tenha rolagem horizontal. */
+  width: 100%;
+  max-width: 100vw;
+  font-size: 50%;
+}
+
+/* aplicando tamanho com Clamp para facilitar na resonsividade  */
+#darkmode-icon{ 
+    font-size: clamp(1rem, 5vw, 2.2rem);
+}
+
+.navbar a{
+    font-size: clamp(1rem, 5vw, 2.2rem);
+}
+
+.logo{
+     font-size: clamp(2rem, 5.5vw, 3.5rem);
+}
+
+h3{
+    /* background-color: green; */
+    font-size: clamp(1.5rem, 3vw, 4rem);
+}
+
+h2{
+    background-color: red;
+}
+
+h1{
+    /* background-color: yellow;  */
+    font-size: clamp(5rem, 3.5vw, 15rem);
+}
+
+p {
+    font-size: clamp(2rem, 2vw, 2.7rem);
+}
+
+/* estilizando body */
+body{
+    background: var(--bg-color); 
+    color:var(--text-color);
+    overflow-x: hidden; /* impede que a página tenha rolagem horizontal. */
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* estilizando header */
+span {
+    color: var(--main-color);
+}
+
+header{
+    position: fixed; /* header será fixado na tela durante o rolamento da página */
+    /* posicionam o header no topo e à esquerda da tela */
+    top: 0; 
+    left: 0;
+    width: 100%; /* faz o header ocupar 100% da largura da tela*/
+    padding: 2rem 7%; /* espaçamento 2rem superior e inferior e 7% nas laterais*/
+    display: flex; /* troca o elemento de colunas por linha */
+    align-items: center; /* Alinha os itens filhos verticalmente ao centro do header */
+    z-index:100;  /* ficará acima de outros elementos com valores de z-index menores */
+    transition: 1s; /* or de fundo ou sombra suavizadas em 1s */
+}
+
+.header.sticky{ /* efeito scroll (ao rolar a página) no header pelo script.js (classe sticky) */
+    background: var(--bg-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+}
+
+.header.sticky .navbar a.active{ /* se o link estiver ativo ele usa a cor principal do site para destaque */
+    color: var(--main-color);
+}
+
+.header.sticky .navbar a::before{ /* alterar a cor da linha  */
+    background: var(--main-color) ;
+    opacity: .7;
+}
+
+.header.sticky #darkmode-icon{ /* altera a cor do icone dark */
+    color: var(--text-color);
+    opacity: .9;
+}
+
+.header.sticky .navbar a { /* efeito scroll nos textos do header */
+    color: var(--text-color);
+}
+
+.navbar a { /* estilizando links (texto de navegação) */
+    position: relative; /* encapsular a linha do before apenas no <a> (menu mobile) */
+    /* font-size: 1.9rem; */
+    color: var(--allwhite);
+    font-weight: 500; /* peso negrito em 500 */
+    margin-right: 3.6rem;   /* adiciona uma margem à direita em cada link item */
+}
+
+.logo{ /* estilizando logo */
+    /* font-size: 2.8rem; */
+    color: var(--text-color);
+    font-weight: 600; /* negrito em 600 */
+    cursor: default; /* cursor do mouse como o padrão (seta) */
+    margin-right: auto; /* pelo header ter display:flex faz com que a logo seja empurrada para a esquerda e outros elementos para a direita */
+}
+
+/* criação da linha abaixo dos links de navegação que será encapsulado no .navbar a*/
+.navbar a.active::before { /* ::before e ::after são usados para adicionar elementos antes ou depois do conteúdo de um elemento sem alterar o HTML. */
+    content: "";  /* necessário para exibição de pseudo elemento, mesmo que esteja vazio */
+    position: absolute; /* será posicionado de forma absoluta em relação ao elemento pai */
+    left: 0; /* começa na borda esquerda do contêiner */
+    bottom: -6px;
+    width: 100%; /* ocupar toda a largura */
+    height: .2rem; /* altura/espessura da linha */
+}
+
+#darkmode-icon{ /* estilizando darkmode icone dentro da div no navbar */
+    /* font-size: 2rem; */
+    color: var(--allwhite);
+    cursor: pointer; /* cursor de click */
+}
+
+#menu-icon{ /* estilizando menu icone dentro da div no navbar */
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;    /* não será visível para o usuário na página. */
+}
+
+section{ /* estilizando todas as sections */
+    min-height: 100vh; /* ocupe no mínimo 100% da altura da janela */ 
+    padding: 10rem 7% 1rem;  /* 10 rem superior, 7% nas laterais, 2rem parte inferior */
+}
+
+/* estilizando home */
+.home{
+    min-height: 100vh;
+    display: flex;
+    /*alinha o item horizontalmente */
+    /* justify-content: center; 
+    /* alinha o item verticalmente */
+    align-items: center;     
+    text-align: center;
+}
+
+.home .home-content { /* alterando largura do conteúdo home */
+    max-width: 85rem;
+}
+
+.home-content h3 { /* estilizando textos do conteúdo */
+    /* font-size: 4.5rem; */
+    font-weight: 600;
+    line-height: .3;
+}
+
+.home-content h1 {
+    /* font-size: 6.8rem; */
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.home-content .social-media a { /* estilizando icones  */
+    display: inline-flex;     /* Coloca os links lado a lado e permite usar alinhamento com justify-content e align-items */
+    justify-content: center;     /* centraliza horizontalmente */
+    align-items: center;  /* centraliza verticalmente o conteúdo do link. */
+    /* Define a largura e a altura do link, tornando-o um quadrado de 4rem x 4rem */
+    width: clamp(2.5rem, 3.5vw, 5.2rem);
+    height: clamp(2.5rem, 3.5vw, 5.2rem);
+    background: transparent;
+    /* border: clamp(.1rem, 0.3vw, .2rem)  solid var(--main-color); */
+    border-radius: 50%;      /* borda arredondada em 50% */
+    box-shadow: .10rem .2rem .5rem var(--shadow-color); /* box-shadow: <deslocamento-horizontal> <deslocamento-vertical> <desfoque> <espalhamento> <cor>; */
+    /* font-size: 3.7rem;  */
+    font-size: clamp(2rem, 3.5vw, 3.9rem);
+
+    /* background-color: green; */
+    color: var(--main-color);
+    margin: 2.5rem 1.5rem 3rem 0; /* Espaçamento externo: topo, direita, base e esquerda, respectivamente */
+    transition: .5s ease;
+}
+
+.home-content .social-media a:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.home .profession-container{ /* estilizando o container pai da giratória */
+    position: absolute;     /* para poder usar o top, right... */
+    top: 50vh;     /* 50% da altura do seu contêiner pai */
+    right:0;    /* será posicionado na borda direita do seu contêiner pai. */
+    transform: translateY(-50%);    /* 50% da sua própria altura para cima, de modo a centrá-lo verticalmente. */
+     /* definindo tamanho do conteiner */
+    width: 100vw;
+    /* max-width: none; */
+    height: 100vh;
+    overflow: hidden;     /* qualquer conteúdo que ultrapasse os limites do .profession-container será ocultado */
+    pointer-events: none;     /* não responda a interações de ponteiro (como cliques ou toques) */
+}
+
+.home .profession-container .profession-box{ /* Elemento circular giratório */
+    position: absolute; /* Posiciona o elemento de forma absoluta dentro do container pai */
+    top: 0;
+    left: 60vw;
+    width: 800px; 
+    height: 100vh;
+    border-radius: 50%;
+    display: flex;     /* altera colunas para linhas */
+    justify-content: center;     /* horizontalmente centralizado */
+    align-items: center;     /* verticalmente centralizado */
+    animation: professionRotate 15s ease-out infinite; /* animação de rotação com duração de 15 segundos, suavização no final, e repetição infinita */
+}
+
+/* Animação de rotanção que está inserida acima no profession box */
+@keyframes professionRotate{
+    0%,20% {
+        transform:rotate(0deg);
+    }
+    25%,45% {
+        transform:rotate(-90deg);
+    }
+    50%,70% {
+        transform:rotate(-180deg);
+    }
+    75%,95% {
+        transform:rotate(-270deg);
+    }
+    100% {
+        transform:rotate(-360deg);
+    }
+}
+
+.home .profession-box .profession { /* estilizando campo profissão */
+    position: absolute;    /* será posicionado de acordo com as coordenadas ou transformações definidas. */
+    left: 0;
+    display: flex;  /* altera colunas para linhas */
+    align-items: center;
+    flex-direction: column;     /* voltar para coluna, porém centralizada */
+    color: var(--main-color);
+    transform: rotate(calc(360deg / 4 * var(--i)));     /* 360° / 4 = 90° cada .profession será girado a partir de sua posição original, distribuindo-os uniformemente em um círculo. */
+    transform-origin: 384px;     /* Define o ponto de origem da transformação (rotação) a 384px de distância do centro do elemento. */
+    background: var(--bg-color);
+    color: var(--main-color);
+    padding: 13px 0 13px 0; /* espaçamento no profession (h3 - titulos da profissao) */
+}
+
+/* alinhando profession com circulo giratório) */
+.home .profession-box .profession:nth-child(1){ /* seleciona o primeiro filho (HTML) */
+      margin-left: 6.5rem;  
+}
+
+.home .profession-box .profession:nth-child(2){ /* CSS */
+      margin-top: 11rem; 
+} 
+
+.home .profession-box .profession:nth-child(4){ /* Bootstrap */
+      margin-bottom: 6rem; 
+}
+
+
+.home .profession i{ /* estilizando icones da profissao */
+    font-size: clamp(4rem, 3.5vw, 4.5rem);
+}
+
+.home .profession h3{ /* estilizando profissao */
+    /* font-size: 3.2rem;  */
+    font-size: clamp(1rem, 3.5vw, 3.2rem);
+    font-weight: 500; 
+}
+
+.home .profession-box .circle{ /* estilizando circulo de efeito */
+    width: 620px;
+    height: 620px;
+    border: 2.3px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.home .overlay{ /* estilizando ovarlay acima do circle e abaixo da img */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height:100vh;  
+    border-top: 50vh solid var(--main-color);     /* 384px */
+    border-right: 25vw solid var(--main-color);
+    border-bottom: 50vh solid var(--main-color);   /* 50% da altura */
+    border-left:25vw solid transparent ;
+    /* display: none;  */
+}
+
+.home-img img{ /* estilizando img home */
+    width: 100%;
+    max-width: 35%;
+    position: absolute;
+    bottom: 0; 
+    right: 0;
+    pointer-events: none;
+    /* display: none;  */
+}
+
+.btn { /* estilizando botão home */
+    display: inline-block;   /* btn se comporta como um bloco, mas ainda assim ficar no fluxo de linha, permitindo que outros elementos fiquem ao seu lado. */
+    padding: 1.7rem 3.5rem;     /* altura e largura do btn */
+    background: var(--main-color);
+    border-radius: 5rem;
+    box-shadow: 0 .2rem .5rem var(--shadow-color);
+    font-size: 1.6rem;
+    color: var(--allwhite);
+    letter-spacing: .1rem;
+    font-weight: 500;
+    border: .2rem solid transparent;     /* adicionando uma borda transparente */
+    transition: .5s ease;     /* transação do hover */
+}
+
+.btn:hover{
+    background: transparent;
+    color: var(--main-color);
+    border-color: var(--main-color);     /* alterando a cor da borda no hover */
+}
+
+/* estilização sobre */
+.about {
+    /* height: 80vh;  */
+    /* border: solid 3px yellow;  */
+    display: flex;  /* para organizar os elementos filhos em linha */
+    justify-content: center; /* centraliza os elementos filhos horizontalmente dentro da seção */
+    align-items: center; /* alinha os elementos verticalmente ao centro da altura do container */
+    gap: 4rem; /* adiciona um espaçamento de 4rem entre os elementos filhos */
+}
+
+.about-img img { /* estilização img sobre */
+    width: 35vw;
+}
+
+.heading { /* estilização titulos*/
+    /* font-size: 6rem; */
+    text-align: center;
+    height: auto; 
+}
+
+.about-content h2 { /* estilização titulo sobre */
+    text-align: center;
+    /* line-height: 11rem; */
+}
+
+.about-content h3 {
+    /* font-size: 2.9rem; */
+    text-align: center;
+    margin-bottom: 2rem;
+
+}
+
+.about-content p {
+    /* font-size: 2.3rem; */
+    text-align: center;
+    margin: .8rem 4rem 0;
+}
+
+.services{ /* estilizando section serviços */
+   display: flex;
+   flex-direction: column;
+   /* border: solid 2px rgb(3, 3, 3); */
+   align-items: center; 
+   justify-content: center; 
+}
+
+/* estilização container serviços */
+.services .services-container {
+    display: flex; /* organizar os itens filhos em linha */
+    justify-content: center;     /* alinhamento horizontal */
+    align-items: center; /* alinhamento vertical */
+    /* Por padrão, os itens dentro de um contêiner flex tentam ficar em uma única linha,
+    mesmo que fiquem apertados. Com flex-wrap: wrap;, os itens serão quebrados em
+    múltiplas linhas quando necessário. */
+    flex-wrap: wrap;
+    gap: 3rem;
+    /* padding-top: 10rem; */
+}
+
+.services-container .services-box { /* estilizando caixas de serviços */
+    /* abreviação de flex-grow: 1;   O item pode crescer se houver espaço disponível */
+    /* flex-shrink: 1; O item pode encolher se não houver espaço suficiente */
+    /* flex-basis: 30rem; O tamanho inicial do item será 30rem */
+    flex: 1 1 0; 
+    background: var(--bg-color);
+    padding: 4rem 1rem 0;     /*espaçamento interno: TOP RIGHT+LEFT BOTTOM;  */
+    border-radius: 5rem;
+    box-shadow: 0 .1rem .5rem var(--shadow-color);    /* box-shadow: deslocamento-x deslocamento-y desfoque espalhamento cor; */
+    text-align: center;
+    border-top: .6rem solid var(--main-color);
+    border-bottom: .6rem solid var(--main-color);
+    transition: 0.5s ease;  /* atraso na transição do hover de 5 segundos */
+    min-height: 40rem; /* altura minima de 30rem */
+    margin-bottom: 15rem;
+}
+
+.services-container .services-box:hover{
+    box-shadow: 0 .1rem 2rem var(--shadow-color);
+    /* Aumenta apenas 3% do tamanho original. */
+    transform: scale(1.06);     
+}
+
+.services-box i { /* estilizando icones serviços */
+    /* font-size: 6rem; */
+    color: var(--main-color);
+}
+
+.services h2{
+    padding-bottom: 5rem; 
+} 
+
+.services-box h3 { /* estilizando textos serviços */
+    /* font-size: 2.9rem; */
+    transition: .5s ease;
+}
+
+.services-box p {
+    /* font-size: 2.3rem; */
+    margin: 2rem 0 1rem;     /* margin: TOP RIGHT+LEFT BOTTOM; */
+}
+
+/* estilização portfolio */
+.portfolio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    /* border: solid 2px red; */
+}
+
+.portfolio h2 { /* estilizando titulo portfolio */
+    margin-bottom: 4rem; 
+    /* margin-top: -15rem; */
+    /* padding-top: 4rem; */
+    /* background-color: red; */
+}
+
+.portfolio .portfolio-container {
+    display: grid;  /* transforma em um container de grade, permitindo organizar os elementos filhos em linhas e colunas. */
+    grid-template-columns: 1fr 1fr 1fr; /* 3 colunas de tamanhos iguais */
+    align-items: center; /* alinha os itens filhos ao centro verticalmente dentro do container */
+    justify-items: center; /* funciona apenas com Grid — alinha os conteúdos dos itens individuais ao centro horizontalmente */
+    gap: 2rem; /* espaçamento de 2rem entre os itens */
+}
+
+.portfolio-container .portfolio-box{
+    position: relative;     /* não tira o elemento do fluxo do layout, apenas permite deslocá-lo. */
+    display: flex;     /* contêiner flexível, permitindo organizar seus filhos (img e .portfolio-layer) em linha ou coluna. */
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem var(--shadow-color);
+    overflow: hidden;     /* qualquer conteúdo que ultrapasse os limites do contêiner será cortado e não ficará visível. */
+    min-height: 100%; 
+}
+
+.portfolio-box .portfolio-layer { /* camada de imagem portfolio */
+    position: absolute; /* será posicionado em relação ao seu ancestral mais próximo que tenha position: relative; no caso o portfolio.box*/
+    bottom: 0; /* faz a camada ocupar toda a área do box-pai */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: color-mix(in srgb, var(--portfolio) 80%, transparent); /* Cria uma sobreposição com transparência, misturando 70% da cor definida em --portfolio com 30% de transparência */
+    color: var(--white-color);
+    display: flex; /* Transforma o elemento em um contêiner flexível para organizar os filhos. */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Organiza os itens filhos em uma coluna (um abaixo do outro). */
+    text-align: center; /* Centraliza o texto horizontalmente. */
+    padding:  0 4rem; /* espaçamento interno de 4rem nas laterais esquerda e direita, sem espaçamento na parte superior ou inferior. */
+    opacity: 0;     /* se torna invisivel, bom para fazer animações hover */
+    transition: .5s ease;
+}
+
+.portfolio-box:hover .portfolio-layer {
+    opacity: 1; /* torna a camada visível quando o mouse passa sobre .portfolio-box */
+}
+
+.portfolio-box img{
+    width: 100%;
+    transition: 1.5s ease;    /* transição do efeito em 5 segundos com calma */
+}
+
+.portfolio-box:hover img {
+    transform: scale(1.1);     /* efeito de aumento na img */
+}
+
+.portfolio-layer h4 { /* estilização texto hover */
+    /* font-size: 2.5rem; */
+    padding-bottom: 1rem;
+}
+
+.portfolio-layer p {
+    /* font-size: 2rem; */
+    margin: .2rem 0 .5rem;     /* Margem superior/ laterais / inferior  */
+    font-weight: 600;
+}
+
+.portfolio-layer a { /* background do i */
+    display: inline-flex;     /* bloco em linha e o flex para alinhar o conteúdo  */
+    justify-content: center;     /* alinha horizontalmente */
+    align-items: center;     /* alinha verticalmente */
+    width: 4rem;
+    height: 4rem;
+    background: var(--white-color);
+    border-radius: 50%;
+    margin-top: 2rem;
+}
+
+.portfolio-layer a i {
+    /* font-size: 2.3rem; */
+    color: var(--text-color);
+}
+
+/* estilização depoimentos */
+.testimonial-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center; /* centraliza verticalmente */
+   align-items: center;     /* centraliza horizontalmente */
+   height: auto;           /* altura absoluta da viewport */
+   width: 100%;
+   padding: 5rem 1rem;
+   /* border: solid 2px green; */
+}
+
+.testimonial-container h2 {
+    padding-top: 12rem;
+}
+
+
+.testimonial-container .testimonial-wrapper{ /* Wrapper: contêiner usado para organizar e estilizar elementos com mais controle no layout. */
+    position: relative;     /* posição do elemento será relativa, permitindo o uso de propriedades como `top`, `left`, etc. */
+    max-width: 120rem;
+    width: 100%; /* A largura do wrapper será 100% do seu contêiner pai */
+    padding: 5rem; /* Define um espaçamento interno de 5rem (todos os lados) */
+}
+
+.testimonial-wrapper .testimonial-box{
+    padding: 1rem;
+    border-radius: 2rem;
+    overflow: hidden;     /* qualquer conteúdo que ultrapasse os limites do elemento será ocultado e não será visível. */
+    height: 50rem;
+}
+
+.testimonial-content .testimonial-slide{
+    display: flex;   /* ativa o Flexbox para organizar os elementos internos */
+    align-items: center;   /* centraliza os elementos verticalmente (no eixo cruzado) */
+    flex-direction: column;   /* organiza os elementos filhos em coluna (um abaixo do outro) */
+    background: var(--bg-color);
+    border-radius: 2rem;
+    box-shadow: 0 .1rem .5rem var(--shadow-color);
+    padding: 3rem 5rem;     /* 3rem superior e inferior | 5rem laterais */
+    border-top: .8rem solid var(--main-color);
+    border-bottom: .8rem solid var(--main-color);
+    min-height: 30rem;
+    padding-top: 10rem; 
+    margin-top: 0;  
+}
+
+.testimonial-slide img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover; /* A imagem irá cobrir toda a área do contêiner */
+    border-radius: 50%;
+    border: .5rem solid var(--bg-color);
+    outline: .5rem solid var(--main-color);     /* definir uma linha de contorno ao redor de um elemento | segunda borda */
+}
+
+.testimonial-slide h3 {
+    /* font-size: 2.5rem; */
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.testimonial-slide p {
+    margin-top: 3rem;
+    /* font-size: 1.9rem; */
+    text-align: center;
+    align-items: center;
+}
+
+
+.testimonial-box .swiper-button-next,
+.testimonial-box .swiper-button-prev{
+    color: var(--main-color);
+}
+
+.testimonial-box .swiper-button-next{
+    right: 0;
+}
+
+.testimonial-box .swiper-button-prev{
+    left: 0;
+}
+
+.testimonial-box .swiper-pagination-bullet { /* estilização indicação do slide */
+    background: var(--text-color);
+}
+
+.testimonial-box .swiper-pagination-bullet-active{
+    background-color: var(--main-color);
+}
+
+/* estilização contato */
+.contact{
+    /* height: 80vh;  */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* centraliza verticalmente */
+    /* border: solid 2px rgb(51, 6, 250); */
+}
+
+.contact h2 {
+    margin-bottom: 5rem;
+}
+
+.contact form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50vw;
+    margin: 1rem auto;     /* Adiciona 1rem de margem no topo e na base, e auto centraliza o formulário horizontalmente. */
+    /* background-color: red; */
+}
+
+.contact form .input-box {
+    /* background-color: green;  */
+    display: flex;    /* container flexível, permitindo organizar os elementos internos horizontalmente. */
+    justify-content:space-between;    /* Distribui os inputs com espaço entre eles, empurrando-os para os extremos laterais. */
+    flex-wrap: wrap;    /* Se os inputs forem muito largos, eles quebram para a próxima linha em telas menores. */
+    /* max-width: 100%; */
+    width: 100%;
+   
+}
+
+.contact form .input-box input,
+.contact form textarea { /* estilização dos campos do form */
+    width: 100%;     /* faz os campos ocuparem toda a largura disponível do contêiner pai */
+    padding: 2rem;  /* Espaçamento interno de 1.5rem em todos os lados, */
+    /* max-width: 600px; */
+    /* font-size: 1.9rem; */
+    color: var(--text-color);
+    background:var(--bg-color);
+    border-radius: .8rem;
+    margin: .7rem 0;
+    /* background-color: yellow; */
+    box-shadow: 0 .1rem .75rem rgb(106, 106, 106);
+}
+
+.contact ::placeholder {
+  color: rgb(112, 112, 112);
+}
+
+.contact form .input-box input{
+    width: 49%;  /* define a largura dos inputs para ocupar 49% do contêiner pai, permitindo que dois inputs fiquem lado a lado com espaço entre eles */
+}
+
+.contact form textarea {
+    resize: none;    /* Impede que o usuário redimensione o elemento, geralmente usado em <textarea>. */
+}
+
+.contact form .btn{ /* estilzação btn contato */
+    margin-top: 5rem;
+    cursor: pointer;
+    margin-bottom: 0 !important;
+}
+
+/* FEEDBACK FORM */
+.mensagem-feedback {
+  position: fixed;   /* fixa o elemento na tela, independente do scroll, permanecendo sempre visível */
+  bottom: 20rem;  /* posiciona a 20rem do rodapé da janela */
+  left: 50%; /* posiciona horizontalmente no meio da tela */
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: #fff;
+  padding: 1rem 2rem;  /* espaçamento interno: 1rem topo/baixo e 2rem laterais */
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  opacity: 0;   /* começa invisível, para ser exibido via animação */
+  transition: opacity 0.4s ease-in-out;
+}
+
+.mensagem-feedback.erro {
+  background-color: #f44336; /* Erro = vermelho */
+}
+
+.mensagem-feedback.mostrar {
+  opacity: 1;
+}
+
+.escondido {
+  display: none;
+}
+
+/* estilização footer */
+.footer {
+    height:10vh;
+    display: flex;    /* tornando os elementos filhos organizados em uma linha ou coluna flexível */
+    justify-content: space-between;    /* distribui os elementos com o máximo de espaço entre eles, colocando um na esquerda e outro na direita. */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 3.5rem 7%;
+    background: var(--main-color);
+    margin-top: 0 !important;
+}
+
+.footer-text p {
+    /* font-size: 1.8rem; */
+    color: var(--allwhite);
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--allwhite);
+    border-radius: .8rem;
+    border: .2rem solid var(--main-color);
+    outline: .2rem solid transparent;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    outline-color: var(--allwhite);
+}
+
+.footer-iconTop a i {
+    /* font-size: 2.5rem; */
+    color: var(--main-color);
+}
+
+@media (max-width: 1650px) {
+    /* .home .profession-container .profession-box{
+        left: 10rem;
+    } */
+
+    .home .home-content{
+        background-color: rgba(255, 0, 0, 0.123);
+    }
+}
+
+/* tela notebook (grande) */
+@media (max-width: 1500px){
+
+    /* aplicando tamanho com Clamp para facilitar na resonsividade  */
+    .navbar a{
+         font-size: clamp(1rem, 5vw, 1.8rem);
+    }
+
+    #darkmode-icon{ 
+       font-size: clamp(1rem, 5vw, 1.8rem);
+    }
+
+    .logo{
+         font-size: clamp(2rem, 5.5vw, 2.8rem);
+    }
+
+    h3{
+        font-size: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    h1{
+        /* background-color: yellow;  */
+        font-size: clamp(5rem, 3.3vw, 13rem);
+    }
+
+    p {
+        font-size: clamp(2rem, 2vw, 2.2rem);
+    }
+
+    .home .home-content {
+        background-color: #4f89ee10;
+        max-width: 65rem;
+    } 
+
+    .home-content .social-media a {
+        font-size: clamp(1rem, 3.5vw, 3.3rem);
+        width: clamp(2.5rem, 3.5vw, 4.5rem);
+        height: clamp(2.5rem, 3.5vw, 4.5rem);
+    }
+
+    /* alinhando o circulo giratório com profession h3 e i*/
+    .home .profession-box .profession:nth-child(1){  
+        margin-left: 7.5rem;
+    }
+ 
+    .home .profession-box .profession:nth-child(2) {
+        margin-bottom: -1.5rem;
+    }
+  
+    .home .profession-box .profession:nth-child(3) {
+        margin-left: -1rem;
+    } 
+
+    .home .profession-box .profession:nth-child(4) {
+        margin-top: -1.5rem;
+    } 
+
+    .about-img img {
+        width: 32vw;
+    }
+
+    .about-content h2 { /* estilização titulo sobre */
+        text-align: center;
+        /* line-height: 12.2rem; */
+    }
+
+    .about-content h3 {
+        font-size: 3rem;
+    }
+
+    .about-content p {
+        font-size: 2.4rem;
+    }
+
+    .services{
+        background-color: yellow;
+    }
+        
+}
+
+@media (max-width: 1200px){
+
+    /* .home .profession-box {
+        margin-left: 15rem;
+    } */
+
+    .heading{
+         font-size: 5rem;
+    }
+
+    .about-content h2{
+        padding-bottom: 2rem;
+    }
+    
+    .services h2{
+        padding-bottom: 4rem;
+    }
+
+    .services .services-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+         "item1 item1"
+         "item2 item3";
+         /* background-color: red; */
+    }
+
+    .services .services-container > :nth-child(1) {
+        grid-area: item1;
+        min-height: 30rem; 
+        max-width: 90rem;
+        justify-self: center; 
+        /* margin-bottom: 20rem; */
+    }
+
+    .services-container .services-box {
+        min-height: 35rem;
+        margin-bottom: 0;
+    }
+
+    .services-box i {
+        margin-top: -2rem;
+    }
+
+    .portfolio{
+        background-color: rgb(0, 255, 0);
+    }
+    .portfolio .portfolio-container{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .portfolio-container .portfolio-box {
+        aspect-ratio: 16 / 9;        /* definindo proporção de altura e largura */
+    }
+}
+
+@media (max-width: 1050px){
+
+    .header{ /* alinhando .header */
+        padding: 2rem 3%;
+    }
+
+    .home-content {
+        margin-left: -5rem;
+    }
+  
+    /* .home .profession-box{
+        margin-left: 25rem;
+    } */
+
+    .about{
+        flex-direction: column-reverse;
+    } 
+
+    .about-img img{
+        width: 40vw;
+    }
+}
+
+@media (max-width: 900px){
+    .home .profession-box{
+        background-color: yellow;
+    }
+
+    .portfolio .portfolio-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
