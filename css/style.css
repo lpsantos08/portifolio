@@ -789,6 +789,7 @@ section{ /* estilizando todas as sections */
     /* aplicando tamanho com Clamp para facilitar na resonsividade  */
     .navbar a{
          font-size: clamp(1rem, 5vw, 1.8rem);
+         background-color: black;
     }
 
     #darkmode-icon{ 
