@@ -10,10 +10,25 @@ let navbar = document.querySelector('.navbar');
   navbar.classList.toggle('active');
 }
 
+//fechando menu com esq
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    navbar.classList.remove('active');
+    menuIcon.classList.remove('bx-x');
+  }
+});
+
+//fechando ao clicar fora
+navbar.addEventListener('click', () => {
+  // Remove as classes para fechar o menu
+  navbar.classList.remove('active');
+  menuIcon.classList.remove('bx-x');
+});
 
 // Destacar o link ativo na barra de navegação (navbar) conforme o usuário rola a página
 let sections = document.querySelectorAll('section'); // sections armazena todos os elementos <section> na página.
 let navLinks = document.querySelectorAll('header nav a'); // navLinks armazena todos os links dentro da barra de navegação (<header nav>).
+
 
 window.onscroll = () => { //evento acionado sempre que o usuário rola a página.
   // Calculando onde cada seção começa e termina
@@ -43,8 +58,8 @@ window.onscroll = () => { //evento acionado sempre que o usuário rola a página
   header.classList.toggle('sticky', window.scrollY > 10); 
 
   // Remove navbar quando selecionado algum link do menu mobile
-  menuIcon.classList.remove ('bx-x');
-  navbar.classList.remove('active');
+  // menuIcon.classList.remove ('bx-x');
+  // navbar.classList.remove('active');
 };
 
 // swiper | slide 
@@ -89,6 +104,7 @@ ScrollReveal({
  ScrollReveal().reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
  ScrollReveal().reveal('.home-content h1, .about-img img ', { origin: 'left' });
  ScrollReveal().reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
+
 
 
 // Inicializa o EmailJS com chave pública

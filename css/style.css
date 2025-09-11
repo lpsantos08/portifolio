@@ -22,18 +22,20 @@
     --placeholder: #afaeae;
     --portfolio:black;
     --allwhite: white;
-    --shadow-color:rgba(0, 0, 0, 0.399); /* sombra (preta com 20% de opacidade) */
+    --shadow-color: rgb(65, 103, 153, 0.8); /* sombra (preta com 20% de opacidade) */
+    --fullscreen: rgba(255, 255, 255, 0.527); 
 }
 
 /* variáveis p/ substituirem as versões claras declaradas em :root */
 .dark-mode{
     --bg-color:#0a101a; /* cor de fundo */
     --text-color:#fdfdfd; /* cor do texto  */
-    --main-color:#416799; /* cor principal */
+    --main-color:rgb(65, 103, 153); /* cor principal */
     --white-color: #0a101a;
     --placeholder: #979797;
     --portfolio: white;
-    --shadow-color:rgba(255, 255, 255, 0.2);/* sombra (preta com 20% de opacidade) */
+    --shadow-color:rgb(65, 103, 153, 0.8);/* sombra (preta com 20% de opacidade) */
+    --fullscreen: rgba(0, 0, 0, 0.349);
 }
 
 /* estilizando html */
@@ -50,29 +52,29 @@ html{
 }
 
 .navbar a{
-    font-size: clamp(1rem, 5vw, 2.2rem);
+    font-size: clamp(1rem, 5vw, 2rem);
 }
 
 .logo{
-     font-size: clamp(2rem, 5.5vw, 3.5rem);
+     font-size: clamp(2rem, 5.5vw, 3.1rem);
 }
 
 h3{
     /* background-color: green; */
-    font-size: clamp(1.5rem, 3vw, 4rem);
+    font-size: clamp(1.5rem, 3vw, 3rem);
 }
 
 h2{
-    background-color: red;
+    background-color: rgb(238, 255, 0);
 }
 
 h1{
-    /* background-color: yellow;  */
-    font-size: clamp(5rem, 3.5vw, 15rem);
+    /* background-color: yellow;   */
+    font-size: clamp(5rem, 3vw, 8rem);
 }
 
 p {
-    font-size: clamp(2rem, 2vw, 2.7rem);
+    font-size: clamp(2.2rem, 1.4vw, 3rem);
 }
 
 /* estilizando body */
@@ -129,7 +131,7 @@ header{
     position: relative; /* encapsular a linha do before apenas no <a> (menu mobile) */
     /* font-size: 1.9rem; */
     color: var(--allwhite);
-    font-weight: 500; /* peso negrito em 500 */
+    font-weight: 549.5; /* peso negrito em 500 */
     margin-right: 3.6rem;   /* adiciona uma margem à direita em cada link item */
 }
 
@@ -139,6 +141,14 @@ header{
     font-weight: 600; /* negrito em 600 */
     cursor: default; /* cursor do mouse como o padrão (seta) */
     margin-right: auto; /* pelo header ter display:flex faz com que a logo seja empurrada para a esquerda e outros elementos para a direita */
+}
+
+.social-icons {
+    display: none;
+}
+
+.navbar i{
+    display: none;
 }
 
 /* criação da linha abaixo dos links de navegação que será encapsulado no .navbar a*/
@@ -152,14 +162,15 @@ header{
 }
 
 #darkmode-icon{ /* estilizando darkmode icone dentro da div no navbar */
-    /* font-size: 2rem; */
+    font-size: 2rem; 
     color: var(--allwhite);
     cursor: pointer; /* cursor de click */
 }
 
 #menu-icon{ /* estilizando menu icone dentro da div no navbar */
-    font-size: 3.6rem;
-    color: var(--text-color);
+    font-size: 3.7rem;
+    color: var(--allwhite);
+    cursor: pointer;
     display: none;    /* não será visível para o usuário na página. */
 }
 
@@ -177,10 +188,14 @@ section{ /* estilizando todas as sections */
     /* alinha o item verticalmente */
     align-items: center;     
     text-align: center;
+    justify-content: center;
 }
 
 .home .home-content { /* alterando largura do conteúdo home */
     max-width: 85rem;
+    margin: 0 auto;
+    /* text-align:left; */
+    margin-left: 2rem;
 }
 
 .home-content h3 { /* estilizando textos do conteúdo */
@@ -201,19 +216,26 @@ section{ /* estilizando todas as sections */
     justify-content: center;     /* centraliza horizontalmente */
     align-items: center;  /* centraliza verticalmente o conteúdo do link. */
     /* Define a largura e a altura do link, tornando-o um quadrado de 4rem x 4rem */
-    width: clamp(2.5rem, 3.5vw, 5.2rem);
-    height: clamp(2.5rem, 3.5vw, 5.2rem);
+    width: clamp(2.5rem, 3.5vw, 4.6rem);
+    height: clamp(2.5rem, 3.5vw, 4.6rem);
     background: transparent;
     /* border: clamp(.1rem, 0.3vw, .2rem)  solid var(--main-color); */
     border-radius: 50%;      /* borda arredondada em 50% */
     box-shadow: .10rem .2rem .5rem var(--shadow-color); /* box-shadow: <deslocamento-horizontal> <deslocamento-vertical> <desfoque> <espalhamento> <cor>; */
     /* font-size: 3.7rem;  */
-    font-size: clamp(2rem, 3.5vw, 3.9rem);
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
 
-    /* background-color: green; */
     color: var(--main-color);
     margin: 2.5rem 1.5rem 3rem 0; /* Espaçamento externo: topo, direita, base e esquerda, respectivamente */
     transition: .5s ease;
+}
+
+.home-content .social-media a:last-child {
+    margin-right: 0;
+}
+
+.home-content .social-media a:first-child {
+    margin-left: 0;
 }
 
 .home-content .social-media a:hover {
@@ -282,32 +304,45 @@ section{ /* estilizando todas as sections */
 
 /* alinhando profession com circulo giratório) */
 .home .profession-box .profession:nth-child(1){ /* seleciona o primeiro filho (HTML) */
-      margin-left: 6.5rem;  
+      margin-left: 7rem;  
 }
 
 .home .profession-box .profession:nth-child(2){ /* CSS */
-      margin-top: 11rem; 
+      margin-top: 11.7rem; 
+      margin-left: 2rem;
+
 } 
 
+.home .profession-box .profession:nth-child(3){ /* Bootstrap */
+      margin-left: -.9rem; 
+}
+
+
 .home .profession-box .profession:nth-child(4){ /* Bootstrap */
-      margin-bottom: 6rem; 
+      margin-bottom: 7rem; 
+      margin-left: 2rem;
 }
 
 
 .home .profession i{ /* estilizando icones da profissao */
-    font-size: clamp(4rem, 3.5vw, 4.5rem);
+    font-size: clamp(4rem, 3.5vw, 4rem);
+    color: #395375b4;
+
 }
 
 .home .profession h3{ /* estilizando profissao */
-    /* font-size: 3.2rem;  */
-    font-size: clamp(1rem, 3.5vw, 3.2rem);
+    font-size: 2.7rem;  
+    /* font-size: clamp(2rem, 2vw, 3.2rem); */
     font-weight: 500; 
+    /* color: color-mix(in srgb, var(--main-color) 55%, transparent); */
+    color: #395375b4;
 }
 
 .home .profession-box .circle{ /* estilizando circulo de efeito */
     width: 620px;
     height: 620px;
-    border: 2.3px solid var(--main-color);
+    /* border: .2px solid var(--main-color);*/
+    box-shadow: 0 0 6px var(--main-color);
     border-radius: 50%;
 }
 
@@ -327,6 +362,7 @@ section{ /* estilizando todas as sections */
 .home-img img{ /* estilizando img home */
     width: 100%;
     max-width: 35%;
+    /* min-width: 46rem;  */
     position: absolute;
     bottom: 0; 
     right: 0;
@@ -334,18 +370,21 @@ section{ /* estilizando todas as sections */
     /* display: none;  */
 }
 
+.btn-wrapper {
+  text-align: center;
+}
+
 .btn { /* estilizando botão home */
     display: inline-block;   /* btn se comporta como um bloco, mas ainda assim ficar no fluxo de linha, permitindo que outros elementos fiquem ao seu lado. */
-    padding: 1.7rem 3.5rem;     /* altura e largura do btn */
+    padding: 1.5rem 2rem;     /* altura e largura do btn */
     background: var(--main-color);
     border-radius: 5rem;
     box-shadow: 0 .2rem .5rem var(--shadow-color);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--allwhite);
-    letter-spacing: .1rem;
+    letter-spacing: .15rem;
     font-weight: 500;
-    border: .2rem solid transparent;     /* adicionando uma borda transparente */
-    transition: .5s ease;     /* transação do hover */
+    transition: .3s ease;     /* transação do hover */
 }
 
 .btn:hover{
@@ -774,72 +813,63 @@ section{ /* estilizando todas as sections */
 }
 
 @media (max-width: 1650px) {
-    /* .home .profession-container .profession-box{
-        left: 10rem;
-    } */
+    .home .profession-container .profession-box{
+        left: 55vw;
+    }  
 
-    .home .home-content{
-        background-color: rgba(255, 0, 0, 0.123);
+    .home .home-content {
+        margin-left: -5rem;
     }
+
 }
 
 /* tela notebook (grande) */
 @media (max-width: 1500px){
-
     /* aplicando tamanho com Clamp para facilitar na resonsividade  */
+    .header {
+          padding: 2rem clamp(1%, 2vw, 5%);
+    }
+
     .navbar a{
-         font-size: clamp(1rem, 5vw, 1.8rem);
-         background-color: black;
+         font-size: clamp(1rem, 5vw, 2.1rem);
     }
 
     #darkmode-icon{ 
-       font-size: clamp(1rem, 5vw, 1.8rem);
+        font-size: clamp(1rem, 5vw, 2.1rem); 
     }
 
     .logo{
-         font-size: clamp(2rem, 5.5vw, 2.8rem);
+         font-size: clamp(2rem, 5.5vw, 3rem);
     }
 
-    h3{
-        font-size: clamp(1.5rem, 3vw, 3rem);
+    .home .home-content h3 {
+        font-size: clamp(2.4rem, 2vw, 3rem);
     }
 
     h1{
-        /* background-color: yellow;  */
-        font-size: clamp(5rem, 3.3vw, 13rem);
+        font-size: clamp(4rem, 3.7vw, 13rem);
     }
 
     p {
-        font-size: clamp(2rem, 2vw, 2.2rem);
+        font-size: clamp(2.2rem, 2vw, 2.5rem);
     }
+
+    .home .profession-container .profession-box{
+        left: 57vw;
+    } 
 
     .home .home-content {
-        background-color: #4f89ee10;
-        max-width: 65rem;
-    } 
+        /* background-color: #4f89ee10; */
+        max-width: 75rem;
+        margin-left: -5rem;
+    }  
 
     .home-content .social-media a {
-        font-size: clamp(1rem, 3.5vw, 3.3rem);
-        width: clamp(2.5rem, 3.5vw, 4.5rem);
-        height: clamp(2.5rem, 3.5vw, 4.5rem);
+        font-size: clamp(3rem, 3.5vw, 3.3rem);
+        width: clamp(4rem, 3.5vw, 4.5rem);
+        height: clamp(4rem, 3.5vw, 4.5rem);
+        /* background-color: red; */
     }
-
-    /* alinhando o circulo giratório com profession h3 e i*/
-    .home .profession-box .profession:nth-child(1){  
-        margin-left: 7.5rem;
-    }
- 
-    .home .profession-box .profession:nth-child(2) {
-        margin-bottom: -1.5rem;
-    }
-  
-    .home .profession-box .profession:nth-child(3) {
-        margin-left: -1rem;
-    } 
-
-    .home .profession-box .profession:nth-child(4) {
-        margin-top: -1.5rem;
-    } 
 
     .about-img img {
         width: 32vw;
@@ -864,11 +894,27 @@ section{ /* estilizando todas as sections */
         
 }
 
-@media (max-width: 1200px){
-
+@media (max-width: 1260px){
     /* .home .profession-box {
         margin-left: 15rem;
     } */
+
+    .home .home-content {
+         /* background-color: #01ff162c;   */
+        max-width: 50vw;
+    } 
+
+    .home .profession h3{ /* estilizando profissao */
+        font-size: 2.8rem;
+    }
+
+    .home .profession-box .profession:nth-child(1){  
+        margin-left: 6.8rem;
+    }
+
+    .home .profession-box .profession:nth-child(4) {
+        margin-top: .5rem;
+    }  
 
     .heading{
          font-size: 5rem;
@@ -920,36 +966,394 @@ section{ /* estilizando todas as sections */
     }
 }
 
-@media (max-width: 1050px){
+@media (max-width: 1200px){
 
-    .header{ /* alinhando .header */
-        padding: 2rem 3%;
-    }
-
-    .home-content {
-        margin-left: -5rem;
-    }
-  
-    /* .home .profession-box{
-        margin-left: 25rem;
+    /* .portfolio .portfolio-container {
+        grid-template-columns: 1fr 1fr;
     } */
 
-    .about{
-        flex-direction: column-reverse;
-    } 
+    .home-img img{
+        min-width: 47rem;
+    }
 
-    .about-img img{
-        width: 40vw;
+    .home .profession-box{
+        margin-left: -3rem;    
+    }
+
+    .home .home-content{
+        /* background-color: yellow; */
+         max-width: 45vw;
     }
 }
 
-@media (max-width: 900px){
-    .home .profession-box{
-        background-color: yellow;
+/* home fora do overlay */
+@media (max-width: 1000px){
+    .header {
+        padding: 2rem 4%;
+    }
+        
+    .navbar a:nth-child(1){
+        color: var(--main-color);
     }
 
-    .portfolio .portfolio-container {
-        grid-template-columns: 1fr 1fr;
+    .home .overlay{
+        border-left:19.5vw solid transparent;
+    } 
+
+    .home-img img{
+        margin-right: -2rem;
+    }
+
+    .home .home-content{
+        max-width: 50rem;
+        margin-left: -1rem;
+    }
+
+    /* .home .profession-box{
+        margin-left: -5rem;    
+    } */
+}
+
+@media (max-width: 975px){
+    .header {
+        padding: 2rem 2.5%;
+    }
+}
+
+@media (max-width: 935px){
+    .header {
+        padding: 2rem 1.5%;
+    }
+    
+    .home .overlay{
+        border-left:20.5vw solid transparent;
+    } 
+
+    .home-img img{
+        min-width: 45rem;
+    }
+    
+    p{
+        font-size: clamp(2.2rem, 3vw, 2.3rem);
+    }
+
+    .home .home-content{
+        max-width: 50rem;
+        margin-left: -1rem;
+    }
+
+    .home .profession h3 {
+        font-size: 2.5rem;
+    }
+
+    .home .profession i {
+        font-size: 3.5rem;
+    }
+
+    .home .profession-box .profession:nth-child(1){  
+        margin-left: 7.2rem;
+    }
+
+    .home .profession-box .profession:nth-child(2) {
+        margin-top: 12.2rem;
+    }
+
+    .home .profession-box .profession:nth-child(3) {
+         margin-left: -1.5rem;  
+    }
+
+    .home .profession-box .profession:nth-child(4) {
+         margin-bottom: 8rem;  
+    }
+}
+
+
+
+/* transform overlay*/
+@media (max-width: 855px){
+    .header.sticky #menu-icon{ /* altera a cor do icone dark */
+        color: var(--text-color);
+        opacity: .9;
+    }
+
+    #menu-icon {
+        display: block;
+        z-index: 1001; /* para aparecer acima do menu aberto */
+        color: var(--text-color);
+        transition: opacity 0.3s ease;
+    }
+
+    #menu-icon.bx-x {
+        color: var(--text-color);
+        opacity: 0.7; /* só um exemplo de efeito visual */
+        transform: rotate(90deg);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #darkmode-icon{
+        font-size:2.5rem;
+        margin-right: 1rem;
+        color: var(--text-color);
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        padding-left: 12%;
+        padding-top: 30vh;
+        justify-content: center;
+        background: var(--fullscreen); /* fundo transparente */
+        backdrop-filter: blur(5px);          /* desfoque no fundo */
+        -webkit-backdrop-filter: blur(15px);  /* suporte safari */
+        gap: 2rem;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-100%);
+    }
+
+    .navbar a {
+        font-size: 3rem;
+        color: var(--text-color); /* defina essa variável no seu CSS */
+        font-weight: 600;
+        text-decoration: none;
+        text-shadow:  1px 1px 5px var(--bg-color); /* sombra para contraste */
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        color: var(--main-color);
+        transform: scale(1.1);
+    }
+
+    /* EFEITO SUBLINHADO ANIMADO */
+    .navbar a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--main-color);
+        transition: width 0.3s ease;
+        margin: 0 auto;
+    }
+
+    .navbar a:hover::after {
+         width: 60%;
+    }
+
+    /* sem o after sublinhado no link ativo */
+    .navbar a.active:hover::after {
+        width: 0;
+    }
+
+    /* Classe ativa: mostra a navbar quando o menu-icon é clicado */
+    .navbar.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+
+    }
+
+    .logo{ 
+        font-size: 2.7rem;
+    }
+
+    .social-icons {
+        display: block;
+        justify-content: center;
+        /* gap: 20px; */
+        margin-left: 2rem;
+        padding-top: 30rem;
+        
+    } 
+
+    .social-icons i {
+        background-color: red;
+        justify-content: center;     /* centraliza horizontalmente */
+        align-items: center;
+        color: var(--main-color);
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;      /* borda arredondada em 50% */
+        box-shadow: .10rem .2rem .5rem var(--shadow-color); /* box-shadow: <deslocamento-horizontal> <deslocamento-vertical> <desfoque> <espalhamento> <cor>; */
+        font-size: 3.5rem;
+    } 
+
+    .navbar i {
+        display: inline-block;
+    }
+
+    /* Mostra só quando navbar estiver ativa */
+    .navbar.active .social-icons {
+        display: flex;
+    }
+
+    .home {   /* home */
+        position: relative;
+        padding: 0 0 35rem 4%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .home .home-content{
+        max-width: 90rem;
+        padding: 0 3rem;
+        z-index: 1;
+        margin-left: 0;
+        margin-right: 3rem;
+        left: 0;
+        right: 0;
+        margin-top: -12rem;
+    }
+
+    .home .profession-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        left: 0;
+    }
+
+    .home .profession-container .profession-box{
+        position: absolute;
+        top: 55vh;
+        margin-left: 0;
+        left: 50%;
+        translate: -49%;
+        width: 400px;
+        height: 400px;
+    }
+
+    .home .profession-box .circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* border: 2px solid var(--main-color); */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .home .profession-box .profession{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: rotate(calc(360deg / 4 * var(--i))) translateY(-210px);
+        transform-origin: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        translate: -50% -50%; /* centraliza o transform */
+        padding: 0 1rem;
+    }
+
+    .home .profession-box .profession h3{
+        font-size: 2.3rem;
+    }
+
+    .home .profession-box .profession i{
+        font-size: 3rem;
+    }
+ 
+    /* alinhando profissao com circulo */
+    .home .profession-box .profession:nth-child(4) {
+        transform: rotate(270deg) translateY(-225px) translateX(-1px);
+    }
+
+    .home .profession-box .profession:nth-child(3) {
+        transform: rotate(180deg) translateY(-210px) translateX(-18px);
+
+    }
+ 
+    .home .profession-box .profession:nth-child(2) {
+        transform: rotate(90deg) translateY(-195px) translateX(-105px);
+    }
+   
+    .home .profession-box .profession:nth-child(1) {
+        transform: rotate(0deg) translateY(-210px) translateX(-65px);
+    }
+
+    .home .overlay {
+       top: 50vh;
+       left: 53vw;
+       transform: rotate(90deg) translate(-50%, 50%) scaleY(3);
+       /* border-width: 129rem; */
+       border-left:77vh solid transparent;
+       border-right: 24vh solid var(--main-color);
+       border-bottom: 50vh solid var(--main-color);
+       border-top: 51.5vh solid var(--main-color);
+    }
+
+    .btn { /* estilizando botão home */
+        padding: 1.5rem 1.5rem;     /* altura e largura do btn */
+        
+    }
+
+    .home-img img {
+        left: 50%;
+        translate: -50%;
+        width: 45rem;
+        bottom: -.7%;
+        min-width: unset;
+        max-width: unset;
+        transition: width 0.3s ease; 
+        /* display: none; */
+    }
+
+    @media (max-height: 850px) {
+        .home-img img {
+            width: 34rem; /* imagem menor em altura pequena */
+        }
+
+        .home .home-content{
+            margin-top: -2rem;
+        }
+    }
+}
+
+@media (max-width: 670px){
+    .home .home-content{
+        /* padding-top: 3rem; */
+        margin-top: -11rem;
+        background-color: rgba(0, 128, 0, 0.137);
+    }
+
+    .home .profession-container .profession-box{
+        top: 57vh;
+        left: 50%;
+        translate: -50%;
+    }
+
+    .home-img img {
+        width: 38rem;
+        min-width: unset;
+        max-width: unset;
+        transition: width 0.3s ease;
+    }
+
+    @media (max-height: 850px) {
+        .home .home-content{
+            /* padding-top: 3rem; */
+            margin-top: 0;
+            background-color: rgba(128, 0, 60, 0.123);
+        }
+        .home-img img {
+            width: 30rem; /* imagem menor em altura pequena */
+        }
+
+        .home .profession-container .profession-box{
+            top: 60vh;
+        }
     }
 }
 
