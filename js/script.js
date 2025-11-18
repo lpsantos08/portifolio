@@ -32,22 +32,23 @@ let navLinks = document.querySelectorAll('header nav a'); // navLinks armazena t
 
 window.onscroll = () => { //evento acionado sempre que o usuário rola a página.
   // Calculando onde cada seção começa e termina
-  sections.forEach(sec =>
-  {
-    let top = window.scrollY;    // Verifica onde a página foi rolada.
-    let offset = sec.offsetTop - 150;     // Pega a posição do topo de cada seção e subtrai 150 pixels (para "antecipar" a ativação do link um pouco antes de chegar ao topo).
-    let height = sec.offsetHeight;     // Pega a altura da seção.
-    let id = sec.getAttribute('id');    // Pega o id da seção para poder ligar ao link correto.
+  let top = window.scrollY;
 
-    // Verificando se a seção está visível
-    if(top >= offset && top < offset + height) // Aqui ele verifica se a posição da página (top) está dentro da seção visível. Ou seja, se você está vendo aquela parte da página.
-    {
-      navLinks.forEach(links =>
-      {
-        links.classList.remove('active'); // remove a classe active de todos os links da barra de navegação.
-        document.querySelector('header nav a[href*=' + id + ']').classList.add('active'); // adiciona a classe active ao link que corresponde à seção visível.
-      });
-    };
+  sections.forEach(sec => {
+    let offset = sec.offsetTop - 100;
+    let height = sec.offsetHeight;
+    let id = sec.getAttribute('id');
+
+    if (top >= offset && top < offset + height) {
+      // Remove active de todos os links apenas uma vez
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      // Adiciona active somente no link referente à seção visível
+      const activeLink = document.querySelector('header nav a[href*="' + id + '"]');
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
   });
 
   // barra de navegação fixa
@@ -56,32 +57,121 @@ window.onscroll = () => { //evento acionado sempre que o usuário rola a página
   //se o usuário rolou mais de 100px, adiciona a classe sticky
   //caso contrário, remove a classe sticky
   header.classList.toggle('sticky', window.scrollY > 10); 
-
-  // Remove navbar quando selecionado algum link do menu mobile
-  // menuIcon.classList.remove ('bx-x');
-  // navbar.classList.remove('active');
 };
 
-// swiper | slide 
-var swiper = new Swiper(".mySwiper", { // criando uma nova instância do Swiper e associando-a a um container HTML que tenha a classe .mySwiper.
-  slidesPerView: 1,     // Define quantos slides são exibidos por vez.
-  spaceBetween: 50,     // Define um espaçamento de 30 pixels entre os slides.
-  loop: true,     // Faz com que o carrossel rode em loop infinito, ou seja, quando chegar ao último slide, ele volta automaticamente para o primeiro.
-  grabCursor: true,
+// ========== SLIDE PORTFOLIO DUPLICAR SLIDES NO DOM ==========
+const swiperWrapper = document.querySelector('.mySwiper3D .swiper-wrapper');
+const originalSlides = swiperWrapper.querySelectorAll('.swiper-slide');
 
-  autoplay: {
-    delay: 3000,               // muda de slide a cada 3 segundos
-    disableOnInteraction: false, // continua mesmo se o usuário interagir
+// Define o total mínimo necessário no DOM
+const totalNeeded = 20;
+
+if (originalSlides.length > 0) {
+  while (swiperWrapper.children.length < totalNeeded) {
+    originalSlides.forEach((slide) => {
+      const clone = slide.cloneNode(true);
+      swiperWrapper.appendChild(clone);
+    });
+  }
+}
+
+// ==========  INICIALIZAR O SWIPER ==========
+var swiper3D = new Swiper(".mySwiper3D", {
+  effect: "coverflow",
+  grabCursor: true,
+  centeredSlides: true,
+  loop: true,
+  slidesPerView: 'auto',
+  slidesPerGroup: 1,
+  spaceBetween: -196,
+  speed: 600,
+  loopedSlides: 15, // Aumentado para refletir os clones
+  loopAdditionalSlides: 5,
+  allowTouchMove: true,
+  watchSlidesProgress: true,
+  watchSlidesVisibility: true,
+  slideToClickedSlide: true,
+
+  coverflowEffect: {
+    rotate: 5,
+    stretch: -0.35,
+    depth: 120,
+    modifier: 5,
+    slideShadows: true,
   },
+
   pagination: {
-    el: ".swiper-pagination",    //   Indica o elemento HTML onde a paginação será exibida.
-    clickable: true,    //   Permite que o usuário clique nas bolinhas para navegar pelos slides.
+    el: ".swiper-pagination",
+    clickable: true,
+    clickable: true,
+    renderBullet: function (index, className) {
+      if (index < 5) { // 👈 mostra só até o 5º bullet
+        return '<span class="' + className + '"></span>';
+      }
+      return ''; // esconde os outros
+    },
   },
-  navigation: { 
-    nextEl: ".swiper-button-next",        // Define o botão para avançar para o próximo slide.
-    prevEl: ".swiper-button-prev",    //   Define o botão para voltar para o slide anterior. 
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
+
+    // === AUTOPLAY ===
+  autoplay: {
+    delay: 2000, // tempo em ms entre cada slide (3s)
+    disableOnInteraction: true, // não continua mesmo após o usuário interagir
+  }
 });
+
+
+
+// ==========  ATUALIZAÇÃO DE CLASSES DE SLIDE ATIVO ==========
+swiper3D.on('slideChangeTransitionStart', () => {
+  swiper3D.slides.forEach((slide) => {
+    const realIndex = slide.getAttribute('data-swiper-slide-index');
+    slide.classList.remove('active-slide');
+    if (parseInt(realIndex) === swiper3D.realIndex) {
+      slide.classList.add('active-slide');
+    }
+  });
+});
+
+// Pega todos os slides dentro do container portfolio-box
+const slides = document.querySelectorAll('.portfolio-box .swiper-slide');
+
+slides.forEach(slide => {
+  const slideContent = slide.querySelector('.slide-content');
+  if(!slideContent) return; // se não existir, pula
+
+  slideContent.addEventListener('mouseenter', () => {
+    slide.classList.add('content-hover');
+  });
+
+  slideContent.addEventListener('mouseleave', () => {
+    slide.classList.remove('content-hover');
+  });
+});
+
+// slide depoimento
+const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,           // 1 slide por vez
+    spaceBetween: 30,           // espaço entre slides
+    loop: true,                 // loop infinito
+    pagination: {
+      el: '.swiper-pagination', // habilita paginação (bolinhas)
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',  // seta próximo
+      prevEl: '.swiper-button-prev',  // seta anterior
+    },
+    autoplay: {
+      delay: 7000,               // troca automática a cada 5s (opcional)
+      disableOnInteraction: false,
+    },
+  });
+
 
 // Modo noturno
 let darkModeIcon = document.querySelector('#darkmode-icon'); // Seleciona o elemento HTML que tem o id="darkmode-icon" e o armazena na variável darkModeIcon
@@ -91,7 +181,6 @@ darkModeIcon.onclick = () => { // Define uma função anônima que será executa
   document.body.classList.toggle ('dark-mode');
 };
 
-// scroll revelação
 ScrollReveal({ 
   reset: true,
   distance: '80px',
@@ -99,12 +188,23 @@ ScrollReveal({
   delay: 100
 });
 
- // biblioteca ScrollReveal.js, que serve para aplicar animações quando os elementos entram na tela ao rolar a página.
- ScrollReveal().reveal('.home-content, .heading', { origin: 'top' }); //  Quando o usuário rola a página e os elementos .home-content ou .heading entram na área visível da tela, eles aparecem deslizando de cima para sua posição original, criando um efeito suave de entrada.
- ScrollReveal().reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
- ScrollReveal().reveal('.home-content h1, .about-img img ', { origin: 'left' });
- ScrollReveal().reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
+// headings - cada um dispara ao atingir 60% de visibilidade
+ScrollReveal().reveal('.heading', { 
+  origin: 'top',
+  viewFactor: 0.8 // dispara quando 60% do heading estiver visível
+});
 
+// outros elementos
+ScrollReveal().reveal('.home-content', { origin: 'top' });
+ScrollReveal().reveal('.services-container, .mySwiper3D, .testimonial-wrapper, .contact form', { 
+  origin: 'bottom' 
+});
+ScrollReveal().reveal('.home-content h1, .profession-container, .about-img img ', { 
+  origin: 'left' 
+});
+ScrollReveal().reveal('.home-img img, .home-content h3, .home-content p, .about-content', { 
+  origin: 'right' 
+});
 
 
 // Inicializa o EmailJS com chave pública
@@ -146,3 +246,9 @@ function exibirMensagem(texto, tipo = "sucesso") {
     }, 500);
   }, 5000);
 }
+
+// bloqueia letras no input telefone
+ const telefoneInput = document.querySelector('input[name="telefone"]');
+  telefoneInput.addEventListener('input', () => {
+    telefoneInput.value = telefoneInput.value.replace(/[^0-9+\-\s()]/g, '');
+  });
